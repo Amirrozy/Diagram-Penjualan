@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laporan Penjualan</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    /* Tabel Rapi dengan Kolom Sama Lebar */
+    table {
+      margin: 20px auto;
+      border-collapse: collapse;
+      width: 80%;
+      table-layout: fixed; /* Membuat kolom sama rata */
+    }
+    table, th, td {
+      border: 1px solid black;
+    }
+    th, td {
+      padding: 10px; /* Padding untuk jarak lebih rapi */
+      text-align: center;
+      white-space: nowrap; /* Mencegah teks memanjang ke bawah */
+      overflow: hidden;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    canvas {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Laporan Penjualan</h1>
+
+  <!-- Tabel Bulan dan Nilai -->
+  <table>
+    <tr>
+      <th rowspan="2">Tahun</th>
+      <th colspan="12">Bulan</th>
+    </tr>
+    <tr>
+      <th>Januari</th>
+      <th>Februari</th>
+      <th>Maret</th>
+      <th>April</th>
+      <th>Mei</th>
+      <th>Juni</th>
+      <th>Juli</th>
+      <th>Agustus</th>
+      <th>September</th>
+      <th>Oktober</th>
+      <th>November</th>
+      <th>Desember</th>
+    </tr>
+    <tr>
+      <td>2022</td>
+      <td>4.017</td>
+      <td>6.135</td>
+      <td>7.091</td>
+      <td>5.841</td>
+      <td>5.036</td>
+      <td>4.547</td>
+      <td>3.467</td>
+      <td>3.970</td>
+      <td>6.313</td>
+      <td>3.595</td>
+      <td>9.207</td>
+      <td>5.945</td>
+    </tr>
+    <tr>
+      <td>2023</td>
+      <td>2.416</td>
+      <td>4.136</td>
+      <td>7.935</td>
+      <td>8.004</td>
+      <td>9.505</td>
+      <td>5.026</td>
+      <td>6.108</td>
+      <td>6.343</td>
+      <td>9.404</td>
+      <td>9.280</td>
+      <td>9.287</td>
+      <td>8.689</td>
+    </tr>
+  </table>
+
+  <!-- Grafik Penjualan -->
+  <canvas id="salesChart" width="800" height="400"></canvas>
+
+  <script>
+    const ctx = document.getElementById('salesChart').getContext('2d');
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [
+          'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
+          'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+        ],
+        datasets: [
+          {
+            label: '2022',
+            backgroundColor: '#4285F4', // Biru
+            data: [4017, 6135, 7091, 5841, 5036, 4547, 3467, 3970, 6313, 3595, 9207, 5945]
+          },
+          {
+            label: '2023',
+            backgroundColor: '#EA4335', // Merah
+            data: [2416, 4136, 7935, 8004, 9505, 5026, 6108, 6343, 9404, 9280, 9287, 8689]
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Laporan Penjualan 2022 vs 2023',
+            font: { size: 18 }
+          },
+          legend: {
+            position: 'top'
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Bulan'
+            }
+          },
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Jumlah Penjualan'
+            },
+            ticks: {
+              stepSize: 2000
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
